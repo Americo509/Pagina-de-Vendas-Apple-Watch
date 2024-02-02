@@ -1,0 +1,75 @@
+const imagemVisualizacao = document.getElementById('imagem-visualizacao');
+const tituloProduto = document.getElementById('titulo-produto');
+const nomeCor = document.getElementById('nome-cor-selecionada');
+const miniaturaImagem0 = document.getElementById('0-imagem-miniatura');
+const miniaturaImagem1 = document.getElementById('1-imagem-miniatura');
+const miniaturaImagem2 = document.getElementById('2-imagem-miniatura');
+
+const AzulInverno = {
+    nome: 'Azul Inverno',
+    pasta: 'imagens-azul-inverno'
+
+};
+const verdeCipreste = {
+    nome: 'Verde Cipreste',
+    pasta: 'imagens-verde-cipreste'
+
+};
+const meiaNoite = {
+    nome: 'Meia Noite',
+    pasta: 'imagens-meia-noite'
+
+};
+const estelar = {
+    nome: 'Estelar',
+    pasta: 'imagens-estelar'
+
+};
+const rosaClaro = {
+    nome: 'Rosa Claro',
+    pasta: 'imagens-rosa-claro'
+
+};
+
+const opcoesCores = [verdeCipreste, AzulInverno, meiaNoite, estelar, rosaClaro];
+const opcoesTamanho = ['41 mm', '45 mm'];
+
+let imagemSelecionada = 1;
+let tamanhoSelecionado = 1;
+let corSelecionada = 1;
+
+function trocarImagem() {
+    const idOpcaoSelecionada = document.querySelector('[name="opcao-imagem"]:checked').id;
+    imagemSelecionada = idOpcaoSelecionada.charAt(0);
+    imagemVisualizacao.src = 'imagens/opcoes-cores/' + opcoesCores[corSelecionada].pasta + '/imagem-' + imagemSelecionada + '.jpeg';
+}
+
+function trocarTamanho() {
+    //Atualizar variavel de controle do tamanho da caixa
+    const idOpcaoSelecionada = document.querySelector('[name="opcao-tamanho"]:checked').id;
+    tamanhoSelecionado = idOpcaoSelecionada.charAt(0);
+    //Mudar o titulo do produto
+    tituloProduto.innerText = 'Pulseira loop esportiva azul-inverno para caixa de ' + opcoesTamanho[tamanhoSelecionado];  
+    //Mudar o tamanho da imagem de acordo com a opcao
+    if (opcoesTamanho[tamanhoSelecionado] == '41 mm') {
+        imagemVisualizacao.classList.add('caixa-pequena')
+    } else {
+        imagemVisualizacao.classList.remove('caixa-pequena')
+    }
+}
+
+function trocarCor() {
+    //Atualizar variavel de controle da cor
+    const idOpcaoSelecionada = document.querySelector('[name="opcao-cor"]:checked').id;
+    corSelecionada = idOpcaoSelecionada.charAt(0);
+    //Trocar titulo da pagina
+    tituloProduto.innerText = 'Pulseira loop esportiva ' + opcoesCores[corSelecionada].nome + ' para caixa de ' + opcoesTamanho[tamanhoSelecionado];  
+    //Trocar nome da cor
+    nomeCor.innerText = 'Cor - ' + opcoesCores[corSelecionada].nome;
+    //Trocar imagens das miniatures exibidas
+    miniaturaImagem0.src = './imagens/opcoes-cores/' + opcoesCores[corSelecionada].pasta + '/imagem-0.jpeg';
+    miniaturaImagem1.src = './imagens/opcoes-cores/' + opcoesCores[corSelecionada].pasta + '/imagem-1.jpeg';
+    miniaturaImagem2.src = './imagens/opcoes-cores/' + opcoesCores[corSelecionada].pasta + '/imagem-2.jpeg';
+    //Trocar imagem de visualizacao
+    imagemVisualizacao.src = 'imagens/opcoes-cores/' + opcoesCores[corSelecionada].pasta + '/imagem-' + imagemSelecionada + '.jpeg';
+}
